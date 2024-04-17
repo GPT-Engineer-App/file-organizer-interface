@@ -1,8 +1,17 @@
-import { Box, Button, FormControl, FormLabel, Input, Textarea, Select, Heading, VStack, HStack, IconButton, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter } from "@chakra-ui/react";
+import { Box, Button, FormControl, FormLabel, Input, Textarea, Select, Heading, VStack, HStack, IconButton, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Checkbox, Text } from "@chakra-ui/react";
+import { useState } from "react";
 import { FaPlus, FaTrash } from "react-icons/fa";
 
 const Index = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [directory, setDirectory] = useState("");
+  const [purpose, setPurpose] = useState("");
+  const [fileTypes, setFileTypes] = useState("");
+  const [organizationScheme, setOrganizationScheme] = useState("");
+  const [hierarchyType, setHierarchyType] = useState("");
+  const [organizationStructure, setOrganizationStructure] = useState("");
+  const [workflow, setWorkflow] = useState("");
+  const [platform, setPlatform] = useState("");
   const handleAddFileType = () => {
     // Logic to add another file type input
   };
@@ -44,17 +53,17 @@ const Index = () => {
         </FormControl>
         <FormControl>
           <FormLabel>Hierarchy Type</FormLabel>
-          <Select placeholder="Select hierarchy type">
-            <option value="flat">Flat</option>
-            <option value="deep">Deep</option>
-          </Select>
+          <VStack align="start">
+            <Checkbox value="flat">Flat</Checkbox>
+            <Checkbox value="deep">Deep</Checkbox>
+          </VStack>
         </FormControl>
         <FormControl>
           <FormLabel>Organization Structure</FormLabel>
-          <Select placeholder="Select organization structure">
-            <option value="hierarchical">Hierarchical</option>
-            <option value="relational">Relational</option>
-          </Select>
+          <VStack align="start">
+            <Checkbox value="hierarchical">Hierarchical</Checkbox>
+            <Checkbox value="relational">Relational</Checkbox>
+          </VStack>
         </FormControl>
         <FormControl>
           <FormLabel>Workflow/Process</FormLabel>
@@ -67,6 +76,9 @@ const Index = () => {
         <Button colorScheme="blue" onClick={onOpen}>
           Review Settings
         </Button>
+        <Text mt={4}>
+          I want to organize my {directory} for {purpose}, containing {fileTypes} files. I want to organize them by {organizationScheme} into a hierarchy that is {hierarchyType} and in a structure that is {organizationStructure}, optimizing for this workflow/process: {workflow} and this platform/app: {platform}.
+        </Text>
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
